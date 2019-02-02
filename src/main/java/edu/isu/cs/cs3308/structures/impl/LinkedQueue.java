@@ -1,5 +1,7 @@
 package edu.isu.cs.cs3308.structures.impl;
 import edu.isu.cs.cs3308.structures.Queue;
+import edu.isu.cs.cs3308.structures.Stack;
+import edu.isu.cs.cs3308.structures.impl.LinkedStack;
 
 public class LinkedQueue<E> implements Queue<E>
 {
@@ -54,18 +56,20 @@ public class LinkedQueue<E> implements Queue<E>
 
     public void offer(E element)
     {
-        Node<E> old = last;
-        last = new Node(element, null);
+        if(element != null)
+        {
+            Node<E> old = last;
+            last = new Node(element, null);
 
-        if(isEmpty())
-        {
-            first = last;
+            if (isEmpty())
+            {
+                first = last;
+            } else
+            {
+                old.next = last;
+            }
+            size++;
         }
-        else
-        {
-            old.next = last;
-        }
-        size++;
     }
 
     public E peek()
@@ -113,8 +117,19 @@ public class LinkedQueue<E> implements Queue<E>
 
     public void reverse()
     {
+        Stack<E> stack = new LinkedStack<>();
+        Queue<E> temp = this;
+        while(!temp.isEmpty())
+        {
+            stack.push(temp.poll());
+        }
+        while(!stack.isEmpty())
+        {
+            offer(stack.pop());
+        }
 
     }
+
 
     public void merge(Queue<E> from)
     {
