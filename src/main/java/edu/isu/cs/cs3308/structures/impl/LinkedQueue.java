@@ -6,6 +6,9 @@ import edu.isu.cs.cs3308.structures.impl.LinkedStack;
 public class LinkedQueue<E> implements Queue<E>
 {
 
+
+    //Here is the node class from all of my other assignments
+
     public class Node<E> {
         private E value;
         private Node<E> next;
@@ -27,6 +30,7 @@ public class LinkedQueue<E> implements Queue<E>
         }
     }
 
+    //My queue has a size, and a first and last node that I use for tracking and adding/removing
     private int size = 0;
     private Node<E> first;
     private Node<E> last;
@@ -36,12 +40,12 @@ public class LinkedQueue<E> implements Queue<E>
         first = null;
         last = null;
     }
-
+    //returns the size of the queue
     public int size()
     {
         return size;
     }
-
+    //checks if the queue is empty
     public boolean isEmpty()
     {
         if(size == 0)
@@ -53,7 +57,7 @@ public class LinkedQueue<E> implements Queue<E>
             return false;
         }
     }
-
+    //adds a node to the back of the queue
     public void offer(E element)
     {
         if(element != null)
@@ -71,7 +75,7 @@ public class LinkedQueue<E> implements Queue<E>
             size++;
         }
     }
-
+    //looks at the node first in the queue and returns its value
     public E peek()
     {
         if(isEmpty())
@@ -83,7 +87,7 @@ public class LinkedQueue<E> implements Queue<E>
             return first.getValue();
         }
     }
-
+    //similar to peek, but deletes the node as well
     public E poll()
     {
         if(isEmpty())
@@ -99,7 +103,7 @@ public class LinkedQueue<E> implements Queue<E>
         }
         return removed;
     }
-
+    //prints the contents of the queue
     public void printQueue()
     {
         Node<E> current = first;
@@ -109,7 +113,8 @@ public class LinkedQueue<E> implements Queue<E>
             current = current.next;
         }
     }
-
+    //transfers the contents from the current queue to the provided one
+    //and deletes the current queue
     public void transfer(Queue<E> into)
     {
         if(into != null)
@@ -123,6 +128,7 @@ public class LinkedQueue<E> implements Queue<E>
 
     }
 
+    //uses a stack to reverse the queue
     public void reverse()
     {
         Stack<E> stack = new LinkedStack<>();
@@ -137,7 +143,7 @@ public class LinkedQueue<E> implements Queue<E>
 
     }
 
-
+    //similar to transfer, but keeps the source queue intact
     public void merge(Queue<E> from)
     {
         if(from == null)
@@ -158,7 +164,7 @@ public class LinkedQueue<E> implements Queue<E>
                 E val = temp.poll();
                 from.offer(val);
             }
-           // from.printQueue();
+
         }
     }
 
