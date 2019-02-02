@@ -3,6 +3,7 @@ package edu.isu.cs.cs3308;
 import edu.isu.cs.cs3308.structures.Queue;
 import edu.isu.cs.cs3308.structures.Stack;
 import edu.isu.cs.cs3308.structures.impl.LinkedQueue;
+import edu.isu.cs.cs3308.structures.impl.LinkedStack;
 
 /**
  *
@@ -25,6 +26,29 @@ public class StackScan {
      * null, or if the stack is emtpy.
      */
     public static <E> boolean scanStack(final Stack<E> stack, E element) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        boolean wasFound = false;
+        if(stack == null || stack.isEmpty() || element == null)
+        {
+            return wasFound;
+        }
+        else
+        {
+            LinkedStack<E> temp = new LinkedStack<>();
+            while(!stack.isEmpty())
+            {
+                E val = stack.pop();
+                temp.push(val);
+                if(val == element)
+                {
+                    wasFound = true;
+                }
+            }
+            while(!temp.isEmpty())
+            {
+                E val = temp.pop();
+                stack.push(val);
+            }
+        }
+        return wasFound;
     }
 }
