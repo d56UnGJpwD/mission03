@@ -112,16 +112,23 @@ public class LinkedQueue<E> implements Queue<E>
 
     public void transfer(Queue<E> into)
     {
+        if(into != null)
+        {
+            reverse();
+            while(!this.isEmpty())
+            {
+                into.offer(this.poll());
+            }
+        }
 
     }
 
     public void reverse()
     {
         Stack<E> stack = new LinkedStack<>();
-        Queue<E> temp = this;
-        while(!temp.isEmpty())
+        while(!this.isEmpty())
         {
-            stack.push(temp.poll());
+            stack.push(this.poll());
         }
         while(!stack.isEmpty())
         {
@@ -133,7 +140,26 @@ public class LinkedQueue<E> implements Queue<E>
 
     public void merge(Queue<E> from)
     {
+        if(from == null)
+        {
+        }
+        else
+        {
+            LinkedQueue<E> temp = new LinkedQueue<>();
+            while(!from.isEmpty())
+            {
+                E val = from.poll();
+                offer(val);
+                temp.offer(val);
 
+            }
+            while(!temp.isEmpty())
+            {
+                E val = temp.poll();
+                from.offer(val);
+            }
+           // from.printQueue();
+        }
     }
 
 }
